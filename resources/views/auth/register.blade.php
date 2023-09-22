@@ -13,24 +13,24 @@
                             <form action="{{ route("createUser") }}" class="pt-3" method="POST">
                                 @csrf
                                 <div class="form-group">
-                                    <input class="form-control form-control-lg" id="exampleInputUsername1" name="firstname"
+                                    <input value="{{ old("firstname") }}" class="form-control form-control-lg" id="exampleInputUsername1" name="firstname"
                                         placeholder="Firstname" type="text">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control form-control-lg" id="exampleInputEmail1" name="lastname"
+                                    <input value="{{ old("lastname") }}"  class="form-control form-control-lg" id="exampleInputEmail1" name="lastname"
                                         placeholder="Lastname" type="text">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control form-control-lg" id="exampleInputPassword1" name="email"
+                                    <input  value="{{ old("email") }}"  class="form-control form-control-lg" id="exampleInputPassword1" name="email"
                                         placeholder="Email" type="text">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control form-control-lg" id="exampleInputPassword1" name="phone"
+                                    <input  value="{{ old("phone") }}"  class="form-control form-control-lg" id="exampleInputPassword1" name="phone"
                                         placeholder="Telephone number" type="text">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control form-control-lg" id="exampleInputPassword1" name="password"
-                                        placeholder="Password" type="text">
+                                    <input  value="{{ old("password") }}"  class="form-control form-control-lg" id="exampleInputPassword1" name="password"
+                                        placeholder="Password" type="password">
                                 </div>
                                 <div class="mb-4">
                                     <div class="form-check">

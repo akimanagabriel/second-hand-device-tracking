@@ -78,6 +78,7 @@
                 </div>
             </li>
             <li class="nav-item nav-profile dropdown">
+                <span class="">{{ Auth::user()->lastname }}&nbsp;&nbsp;&nbsp;</span>
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="profileDropdown">
                     <img alt="profile" src="images/faces/face28.jpg" />
                 </a>
@@ -87,15 +88,15 @@
                         Settings
                     </a>
                     <a class="dropdown-item">
-                        <i class="ti-power-off text-primary"></i>
-                        Logout
+                        <form action="{{ route('logout') }}" method="post">
+                            @csrf
+                            <button class="nav-link btn py-0" type="submit">
+                                <i class="ti-power-off text-danger"></i>
+                                <span class="menu-title text-danger">Logout</span>
+                            </button>
+                        </form>
                     </a>
                 </div>
-            </li>
-            <li class="nav-item nav-settings d-none d-lg-flex">
-                <a class="nav-link" href="#">
-                    <i class="icon-ellipsis"></i>
-                </a>
             </li>
         </ul>
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" data-toggle="offcanvas"

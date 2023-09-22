@@ -9,23 +9,21 @@
                 <div class="row w-100 mx-0">
                     <div class="col-lg-4 mx-auto">
                         <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-                            <div class="brand-logo">
-                                <img alt="logo" src="../../images/logo.svg">
-                            </div>
                             <h4>Hello! let's get started</h4>
                             <h6 class="font-weight-light">Sign in to continue.</h6>
-                            <form class="pt-3">
+                            <form action="{{ route('login') }}" class="pt-3" method="POST">
+                                @csrf
                                 <div class="form-group">
-                                    <input class="form-control form-control-lg" id="exampleInputEmail1"
-                                        placeholder="Username" type="email">
+                                    <input class="form-control form-control-lg" id="exampleInputEmail1" name="email"
+                                        placeholder="Email" type="text" value="{{ old('email') }}">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control form-control-lg" id="exampleInputPassword1"
+                                    <input class="form-control form-control-lg" id="exampleInputPassword1" name="password"
                                         placeholder="Password" type="password">
                                 </div>
                                 <div class="mt-3">
-                                    <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
-                                        href="../../index.html">SIGN IN</a>
+                                    <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
+                                        type="submit">SIGN IN</button>
                                 </div>
                                 <div class="my-2 d-flex justify-content-between align-items-center">
                                     <div class="form-check">
