@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\UserCreationController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
+Auth::routes();
+
+Route::middleware("guest")->group(function () {
+    Route::view('/', 'auth.login');
+    // user routes
+    Route::post('/createUser', [UserCreationController::class, 'createUser'])->name("createUser");
 });
 
-Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

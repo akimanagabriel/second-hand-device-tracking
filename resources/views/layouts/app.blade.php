@@ -997,6 +997,12 @@
     <script src="js/dashboard.js"></script>
     <script src="js/Chart.roundedBarCharts.js"></script>
     <!-- End custom js for this page-->
+
+    {{-- toast  --}}
+    {{-- toast --}}
+    <link href="toast/jquery.toaster.css" rel="stylesheet">
+    <script src="toast/jquery.toaster.js"></script>
+    @include('messages.message')
 </body>
 
 </html>
