@@ -16,39 +16,65 @@
                     </div>
                 </div>
                 <div class="table-responsive pt-3">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {{-- @foreach ($users as $user)
+                    @if (count($categories) == 0)
+                        <div class="alert alert-info">No category registered yet</div>
+                    @else
+                        <table class="table table-bordered">
+                            <thead>
                                 <tr>
-                                    <td>{{ str_pad($loop->index + 1, 2, 0, STR_PAD_LEFT) }}</td>
-                                    <td>{{ Str::ucfirst($user->firstname) }}</td>
-                                    <td>{{ Str::ucfirst($user->lastname) }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>{{ $user->phone }}</td>
-                                    <td>{{ $user->type }}</td>
-                                    <td>{{ $user->created_at->diffForHumans() }}</td>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>actions</th>
                                 </tr>
-                            @endforeach --}}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($categories as $cat)
+                                    <tr>
+                                        <td>{{ str_pad($loop->index + 1, 2, 0, STR_PAD_LEFT) }}</td>
+                                        <td>{{ $cat->name }}</td>
+                                        <td>
+                                            <button class="btn btn-sm btn-danger"
+                                                data-target="#deleteCategory-{{ $cat->id }}"
+                                                data-toggle="modal">Delete</button>
+
+                                            {{-- delete  modal --}}
+                                            <form action="{{ route('category.destroy', $cat->id) }}" method="POST">
+                                                @csrf
+                                                @method('delete')
+                                                <div class="modal" id="deleteCategory-{{ $cat->id }}">
+                                                    <div class="modal-dialog modal-dialog-sm">
+                                                        <div class="modal-content">
+                                                            <!-- Modal body -->
+                                                            <div class="modal-body">
+                                                                <p>Are you sure you want to delete this category?</p>
+                                                            </div>
+                                                            <!-- Modal footer -->
+                                                            <div class="mb-4 mx-5 d-flex justify-content-end">
+                                                                <button class="btn btn-secondary mx-3" data-dismiss="modal"
+                                                                    type="button">No</button>
+                                                                <button class="btn btn-primary" type="submit">Yes</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    @endif
                 </div>
             </div>
             <div class="d-flex justify-content-end" style="margin-right: 20px">
-                {{-- {{ $users->links() }} --}}
+                {{ $categories->links() }}
             </div>
         </div>
     </div>
 
 
-    {{-- new user modal --}}
-    <form action="{{ route('users.add') }}" method="POST">
+    {{-- new category  modal --}}
+    <form action="{{ route('category.store') }}" method="POST">
         @csrf
         <div class="modal" id="newUserModal">
             <div class="modal-dialog modal-dialog-sm">
@@ -56,48 +82,24 @@
                 <div class="modal-content">
 
                     <div class="modal-header">
-                        <h4 class="modal-title">Create a new user</h4>
+                        <h4 class="modal-title">Create a new category</h4>
                         <button class="close" data-dismiss="modal" type="button">&times;</button>
                     </div>
                     <!-- Modal body -->
                     <div class="modal-body">
 
                         <div class="form-group">
-                            <input class="form-control" id="exampleInputUsername1" name="firstname" placeholder="Firstname"
-                                type="text" value="{{ old('firstname') }}">
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" id="exampleInputEmail1" name="lastname" placeholder="Lastname"
-                                type="text" value="{{ old('lastname') }}">
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" id="exampleInputPassword1" name="email" placeholder="Email"
-                                type="text" value="{{ old('email') }}">
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" id="exampleInputPassword1" name="phone"
-                                placeholder="Telephone number" type="text" value="{{ old('phone') }}">
-                        </div>
-                        <div class="form-group">
-                            <input class="form-control" id="exampleInputPassword1" name="password" placeholder="Password"
-                                type="password" value="{{ old('password') }}">
+                            <input class="form-control" id="exampleInputUsername1" name="name"
+                                placeholder="Category name" type="text" value="{{ old('name') }}">
                         </div>
 
-                        <div class="form-group">
-                            <select class="form-control" id="exampleInputPassword1" name="type" placeholder="Password"
-                                value="{{ old('type') }}">
-                                <option disabled selected value="">--Select account type--</option>
-                                <option value="client">Client</option>
-                                <option value="admin">Admin</option>
-                            </select>
-                        </div>
 
                     </div>
 
                     <!-- Modal footer -->
                     <div class="modal-footer">
                         <button class="btn btn-secondary" data-dismiss="modal" type="button">Discard</button>
-                        <button class="btn btn-primary" type="submit">Save user</button>
+                        <button class="btn btn-primary" type="submit">Save category</button>
                     </div>
 
                 </div>

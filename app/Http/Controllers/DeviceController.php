@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\Device;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class DeviceController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $categories = Category::latest()->paginate(6);
-        return view("category.index", compact("categories"));
+        //
     }
 
     /**
@@ -29,17 +28,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            "name" => "required|min:4|string|unique:categories"
-        ]);
-        Category::create($request->all());
-        return redirect()->back()->with("success", "Category created!");
+        //
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show(Device $device)
     {
         //
     }
@@ -47,7 +42,7 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
+    public function edit(Device $device)
     {
         //
     }
@@ -55,7 +50,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Device $device)
     {
         //
     }
@@ -63,9 +58,8 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy(Device $device)
     {
-        $category->delete();
-        return redirect()->back()->with("success", "Category deleted successfully");
+        //
     }
 }

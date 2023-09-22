@@ -16,12 +16,15 @@
             </a>
         </li>
 
-        <li class="nav-item {{ Request::routeIs('category.index') ? 'active' : null }}">
-            <a class="nav-link" href="{{ route('category.index') }}">
-                <i class="mdi mdi-google-circles-communities menu-icon"></i>
-                <span class="menu-title">Device categories</span>
-            </a>
-        </li>
+        @if (Auth::user()->type == 'admin')
+            <li class="nav-item {{ Request::routeIs('category.index') ? 'active' : null }}">
+                <a class="nav-link" href="{{ route('category.index') }}">
+                    <i class="mdi mdi-google-circles-communities menu-icon"></i>
+                    <span class="menu-title">Device categories</span>
+                </a>
+            </li>
+        @endif
+
 
         <li class="nav-item {{ Request::routeIs('devices') ? 'active' : null }}">
             <a class="nav-link" href="#">
