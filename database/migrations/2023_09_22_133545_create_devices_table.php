@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
@@ -13,6 +14,12 @@ return new class extends Migration
     {
         Schema::create('devices', function (Blueprint $table) {
             $table->id();
+            $table->string("name");
+            $table->string("sn");
+            $table->integer("user_id");
+            $table->string("category");
+            $table->string("brand");
+            $table->integer("status")->default(1);
             $table->timestamps();
         });
     }

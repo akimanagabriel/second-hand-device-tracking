@@ -27,4 +27,5 @@ Route::middleware('auth')->group(function () {
 
     // devices
     Route::resource('/device', DeviceController::class);
+    Route::get("change-device-status/{id}", [DeviceController::class,"changeStatus"])->name("statuser");
 });

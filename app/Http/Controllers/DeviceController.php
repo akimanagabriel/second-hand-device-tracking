@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Device;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DeviceController extends Controller
 {
@@ -12,7 +15,10 @@ class DeviceController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::orderBy("name")->get();
+        $persons = User::orderBy("Firstname")->get();
+        $devices = Device::latest()->where("user_id", Auth::user()->id)->get();
+        return view("device.index", compact("devices", "categories", "persons"));
     }
 
     /**
@@ -28,7 +34,20 @@ class DeviceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "name" => "required|min:4|string",
+            "sn" => "required|min:4|string",
+            "category" => "required|string",
+            "brand" => "required|string",
+        ]);
+
+        $request->merge([
+            "user_id" => Auth::user()->id,
+            "status" => 1
+        ]);
+
+        Device::create($request->all());
+        return redirect()->back()->with("success", "Device registered!");
     }
 
     /**
@@ -61,5 +80,13 @@ class DeviceController extends Controller
     public function destroy(Device $device)
     {
         //
+    }
+
+    public function changeStatus($id)
+    {
+        $device = Device::find(decrypt($id));
+        $status = !$device->status;
+        $device->update(["status" => $status]);
+        return redirect()->back()->with("success", "Status changes!");
     }
 }

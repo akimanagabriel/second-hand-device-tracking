@@ -9,8 +9,8 @@
             </a>
         </li>
 
-        <li class="nav-item {{ Request::routeIs('devices') ? 'active' : null }}">
-            <a class="nav-link" href="#">
+        <li class="nav-item {{ Request::routeIs('device.index') ? 'active' : null }}">
+            <a class="nav-link" href="{{ route("device.index") }}">
                 <i class="mdi mdi-airplay menu-icon"></i>
                 <span class="menu-title">My Devices</span>
             </a>
