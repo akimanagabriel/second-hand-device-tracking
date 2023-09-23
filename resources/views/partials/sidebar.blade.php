@@ -40,8 +40,8 @@
             </a>
         </li>
 
-        <li class="nav-item {{ Request::routeIs('devices') ? 'active' : null }}">
-            <a class="nav-link" href="#">
+        <li class="nav-item {{ Request::routeIs('notifications') ? 'active' : null }}">
+            <a class="nav-link" href="{{ route("notifications") }}">
                 <i class="mdi mdi-bell-ring-outline menu-icon"></i>
                 <span class="menu-title">Notifications</span>
             </a>

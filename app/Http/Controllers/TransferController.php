@@ -108,4 +108,5 @@ class TransferController extends Controller
         Auth::user()->unreadNotifications->markAsRead();
         return redirect()->back();
     }
+
 }

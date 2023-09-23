@@ -52,6 +52,10 @@
                                 {{ $receiver->email }}
                             </p>
                             <p>
+                                <strong>National id: </strong>
+                                {{ $receiver->nid }}
+                            </p>
+                            <p>
                                 <strong>Joined since: </strong>
                                 {{ $receiver->created_at->diffForHumans() }}
                             </p>
@@ -70,6 +74,10 @@
                             <p>
                                 <strong>Email: </strong>
                                 {{ $sender->email }}
+                            </p>
+                            <p>
+                                <strong>National Id: </strong>
+                                {{ $sender->nid }}
                             </p>
                             <p>
                                 <strong>Joined since: </strong>

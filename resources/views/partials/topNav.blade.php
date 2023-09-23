@@ -59,7 +59,7 @@
                     </div>
 
                     @foreach (Auth::user()->unreadNotifications as $notification)
-                        <a class="dropdown-item preview-item" style="max-width: 400px">
+                        <a class="dropdown-item preview-item">
                             <div class="preview-thumbnail">
                                 @if ($notification->type == 'App\Notifications\RegisterNotification')
                                 <div class="preview-icon bg-success">

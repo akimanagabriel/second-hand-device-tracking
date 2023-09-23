@@ -25,6 +25,10 @@
                                         placeholder="Email" type="text">
                                 </div>
                                 <div class="form-group">
+                                    <input  value="{{ old("nid") }}"  class="form-control form-control-lg" id="exampleInputPassword1" name="nid"
+                                        placeholder="National id" type="number">
+                                </div>
+                                <div class="form-group">
                                     <input  value="{{ old("phone") }}"  class="form-control form-control-lg" id="exampleInputPassword1" name="phone"
                                         placeholder="Telephone number" type="text">
                                 </div>

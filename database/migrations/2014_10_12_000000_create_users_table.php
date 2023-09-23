@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('type')->default('client');
             $table->string('password');
+            $table->string('nid');
             $table->rememberToken();
             $table->timestamps();
         });

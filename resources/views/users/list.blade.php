@@ -23,6 +23,7 @@
                                 <th>First name</th>
                                 <th>Last name</th>
                                 <th>Email</th>
+                                <th>National Id</th>
                                 <th>Phone number</th>
                                 <th>Acc. Type</th>
                                 <th>Joined since</th>
@@ -35,6 +36,7 @@
                                     <td>{{ Str::ucfirst($user->firstname) }}</td>
                                     <td>{{ Str::ucfirst($user->lastname) }}</td>
                                     <td>{{ $user->email }}</td>
+                                    <td>{{ $user->nid }}</td>
                                     <td>{{ $user->phone }}</td>
                                     <td>{{ $user->type }}</td>
                                     <td>{{ $user->created_at->diffForHumans() }}</td>
@@ -77,6 +79,10 @@
                         <div class="form-group">
                             <input class="form-control" id="exampleInputPassword1" name="email" placeholder="Email"
                                 type="text" value="{{ old('email') }}">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control form-control" id="exampleInputPassword1" name="nid"
+                                placeholder="National id" type="number" value="{{ old('nid') }}">
                         </div>
                         <div class="form-group">
                             <input class="form-control" id="exampleInputPassword1" name="phone"

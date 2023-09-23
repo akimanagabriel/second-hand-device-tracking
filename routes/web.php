@@ -34,5 +34,6 @@ Route::middleware('auth')->group(function () {
     Route::resource("/transfer", TransferController::class);
 
     // notification
-    Route::get("/readall",[TransferController::class,"markAsRead"])->name("readAllNotification");
+    Route::get("/readall", [TransferController::class, "markAsRead"])->name("readAllNotification");
+    Route::view("/notifications", "notification.all")->name("notifications");
 });
