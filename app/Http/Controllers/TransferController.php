@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Device;
 use App\Models\Transfer;
+use App\Models\User;
+use App\Notifications\TransferNotification;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TransferController extends Controller
 {
@@ -28,7 +32,34 @@ class TransferController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $request->validate([
+            "receiver" => "required|numeric",
+            "comment" => "required|string|min:5",
+            "device" => "required|numeric"
+        ]);
+
+        $request->merge([
+            "sender" => Auth::user()->id,
+        ]);
+
+        $device = Device::find($request->device);
+        $receiver = User::find($request->receiver);
+        $sender = User::find(Auth::user()->id);
+        // update device owner
+        $device->update(["user_id" => $request->receiver]);
+
+        // save a transfer history
+        Transfer::create($request->all());
+
+        // Notify a sender
+        $notification = "You have transfered ownership of <br> <b>$device->brand $device->name</b> to <b>$receiver->firstname $receiver->lastname </b>";
+        $sender->notify(new TransferNotification($notification));
+
+        // Notify a receiver
+        $notification = "You have received ownership of <br> <b>$device->brand $device->name</b> from <b>$sender->firstname $sender->lastname </b>";
+        $receiver->notify(new TransferNotification($notification));
+
+        return redirect()->back()->with("success", "Transfer completed successfully");
     }
 
     /**
@@ -61,5 +92,11 @@ class TransferController extends Controller
     public function destroy(Transfer $transfer)
     {
         //
+    }
+
+    public function markAsRead()
+    {
+        Auth::user()->unreadNotifications->markAsRead();
+        return redirect()->back();
     }
 }

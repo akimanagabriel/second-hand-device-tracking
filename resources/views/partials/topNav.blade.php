@@ -26,57 +26,67 @@
                 </div>
             </li>
         </ul>
+
+
+
+
+        {{-- NOTIFICATION --}}
         <ul class="navbar-nav navbar-nav-right">
             <li class="nav-item dropdown">
+
                 <a class="nav-link count-indicator dropdown-toggle" data-toggle="dropdown" href="#"
                     id="notificationDropdown">
                     <i class="icon-bell mx-0"></i>
-                    <span class="count"></span>
+                    @if (count(Auth::user()->unreadNotifications) != 0)
+                        <span class="count"></span>
+                    @endif
                 </a>
+
                 <div aria-labelledby="notificationDropdown"
                     class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list">
-                    <p class="mb-0 font-weight-normal float-left dropdown-header">Notifications</p>
-                    <a class="dropdown-item preview-item">
-                        <div class="preview-thumbnail">
-                            <div class="preview-icon bg-success">
-                                <i class="ti-info-alt mx-0"></i>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <p class="mb-0 font-weight-normal float-left dropdown-header">
+                            {{ count(Auth::user()->unreadNotifications) != 0 ? 'Notifications' : 'No new Notification' }}
+                        </p>
+                        @if (count(Auth::user()->unreadNotifications) != 0)
+                            <a class="d-flex align-items-center gap-2" href="{{ route('readAllNotification') }}"
+                                style="margin-right: 15px">
+                                <i class="mdi mdi-check-all mx-1"></i>
+                                <span>Mark all as read</span>
+                            </a>
+                        @endif
+
+                    </div>
+
+                    @foreach (Auth::user()->unreadNotifications as $notification)
+                        <a class="dropdown-item preview-item" style="max-width: 400px">
+                            <div class="preview-thumbnail">
+                                <div class="preview-icon bg-secondary">
+                                    <i class="mdi mdi-repeat mx-0"></i>
+                                </div>
                             </div>
-                        </div>
-                        <div class="preview-item-content">
-                            <h6 class="preview-subject font-weight-normal">Application Error</h6>
-                            <p class="font-weight-light small-text mb-0 text-muted">
-                                Just now
-                            </p>
-                        </div>
-                    </a>
-                    <a class="dropdown-item preview-item">
-                        <div class="preview-thumbnail">
-                            <div class="preview-icon bg-warning">
-                                <i class="ti-settings mx-0"></i>
+
+                            <div class="preview-item-content">
+                                <h6 class="preview-subject font-weight-bold mb-0 ">Transfer</h6>
+                                <p class="font-weight-light small-text mb-2 text-muted">
+                                    {{ $notification->created_at->diffForHumans() }}
+                                </p>
+                                <div>
+                                    <span style="color: rgba(0, 0, 0, 0.649)">
+                                        @foreach ($notification->data as $message)
+                                            {!! $message !!}
+                                        @endforeach
+                                    </span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="preview-item-content">
-                            <h6 class="preview-subject font-weight-normal">Settings</h6>
-                            <p class="font-weight-light small-text mb-0 text-muted">
-                                Private message
-                            </p>
-                        </div>
-                    </a>
-                    <a class="dropdown-item preview-item">
-                        <div class="preview-thumbnail">
-                            <div class="preview-icon bg-info">
-                                <i class="ti-user mx-0"></i>
-                            </div>
-                        </div>
-                        <div class="preview-item-content">
-                            <h6 class="preview-subject font-weight-normal">New user registration</h6>
-                            <p class="font-weight-light small-text mb-0 text-muted">
-                                2 days ago
-                            </p>
-                        </div>
-                    </a>
+                        </a>
+                    @endforeach
+
+
                 </div>
             </li>
+
+
             <li class="nav-item nav-profile dropdown">
                 <span class="">{{ Auth::user()->lastname }}&nbsp;&nbsp;&nbsp;</span>
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="profileDropdown">

@@ -62,7 +62,7 @@
                     </div>
                 </div>
 
-                {{ Auth::user()->notifications }}
+                {{-- {{ Auth::user()->notifications }} --}}
                 {{-- transfer modal --}}
                 <form action="{{ route('transfer.store') }}" method="post">
                     @csrf
@@ -87,7 +87,7 @@
                                         <select class="form-control" id="exampleInputUsername1" name="receiver">
                                             <option disabled selected value="">-- Choose a receiver --</option>
                                             @foreach ($persons as $person)
-                                                @if ($person->id != Auth::user()->id && $person->type != 'admin')
+                                                @if ($person->id != Auth::user()->id)
                                                     <option value="{{ $person->id }}">
                                                         {{ $person->firstname }}
                                                         {{ $person->lastname }}
@@ -109,8 +109,8 @@
 
                                 <!-- Modal footer -->
                                 <div class="modal-footer">
-                                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-                                    <button class="btn btn-primary" type="button">Save Changes</button>
+                                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Discard</button>
+                                    <button class="btn btn-primary" type="submit">Proceed</button>
                                 </div>
                             </div>
                         </div>
