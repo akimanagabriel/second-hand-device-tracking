@@ -15,7 +15,6 @@
                         <button class="btn btn-primary" data-target="#newDevice" data-toggle="modal">Add Device</button>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
