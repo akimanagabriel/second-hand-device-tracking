@@ -45,7 +45,8 @@
                                 <div>
                                     <div class="dropdown">
                                         <button {{ !$device->status ? 'disabled' : null }} aria-expanded="false"
-                                            aria-haspopup="true" class="btn btn-primary btn-sm d-flex align-items-center gap-2"
+                                            aria-haspopup="true"
+                                            class="btn btn-primary btn-sm d-flex align-items-center gap-2"
                                             data-target="#transferDevice{{ $device->user_id }}" data-toggle="modal"
                                             type="button">
                                             <i class="mdi mdi-repeat"></i> Transfer
@@ -61,51 +62,60 @@
                     </div>
                 </div>
 
+                {{ Auth::user()->notifications }}
                 {{-- transfer modal --}}
-                <!-- Modal -->
-                <div class="modal fade" id="transferDevice{{ $device->user_id }}">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <!-- Modal Header -->
-                            <div class="modal-header">
-                                <h4 class="modal-title">Transfer of ownership</h4>
-                                <button class="close" data-dismiss="modal" type="button">&times;</button>
-                            </div>
-
-                            <!-- Modal body -->
-                            <div class="modal-body">
-                                <p class="text-secondary">
-                                    <strong>Warning</strong>
-                                    if you make a transfer of this device a system will no longer locate device to you.
-                                </p>
-
-                                <div class="form-group mt-3">
-                                    <label for="">Comment</label>
-                                    <textarea class="form-control" id="exampleInputUsername1" name="comment" placeholder="comment" type="text"
-                                        value="{{ old('comment') }}"></textarea>
+                <form action="{{ route('transfer.store') }}" method="post">
+                    @csrf
+                    <div class="modal fade" id="transferDevice{{ $device->user_id }}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Transfer of ownership</h4>
+                                    <button class="close" data-dismiss="modal" type="button">&times;</button>
                                 </div>
 
-                                <div class="form-group mt-3">
-                                    <label for="">Receiver</label>
-                                    <select class="form-control" id="exampleInputUsername1" name="receiver_id">
-                                        @foreach ($persons as $person)
-                                            @if ($person->id != Auth::user()->id && $person->type != 'admin')
-                                                <option value="{{ $person->id }}">{{ $person->firstname }}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    <p class="text-secondary">
+                                        <strong>Warning</strong>
+                                        if you make a transfer of this device a system will no longer locate device to you.
+                                    </p>
+
+                                    <div class="form-group mt-3">
+                                        <label for="">Receiver</label>
+                                        <select class="form-control" id="exampleInputUsername1" name="receiver">
+                                            <option disabled selected value="">-- Choose a receiver --</option>
+                                            @foreach ($persons as $person)
+                                                @if ($person->id != Auth::user()->id && $person->type != 'admin')
+                                                    <option value="{{ $person->id }}">
+                                                        {{ $person->firstname }}
+                                                        {{ $person->lastname }}
+                                                        ({{ $person->email }})
+                                                    </option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group mt-3">
+                                        <label for="">Comment</label>
+                                        <textarea class="form-control" id="exampleInputUsername1" name="comment" placeholder="comment" type="text"
+                                            value="{{ old('comment') }}"></textarea>
+                                    </div>
+                                    {{-- other hidden fields { device id } --}}
+                                    <input name="device" type="hidden" value="{{ $device->id }}">
                                 </div>
 
-                            </div>
-
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
-                                <button class="btn btn-primary" type="button">Save Changes</button>
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                                    <button class="btn btn-primary" type="button">Save Changes</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             @endforeach
 
         </div>

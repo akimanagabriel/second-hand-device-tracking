@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\TransferController;
 use App\Http\Controllers\UserCreationController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -27,5 +28,8 @@ Route::middleware('auth')->group(function () {
 
     // devices
     Route::resource('/device', DeviceController::class);
-    Route::get("change-device-status/{id}", [DeviceController::class,"changeStatus"])->name("statuser");
+    Route::get("change-device-status/{id}", [DeviceController::class, "changeStatus"])->name("statuser");
+
+    // transfer
+    Route::resource("/transfer", TransferController::class);
 });
