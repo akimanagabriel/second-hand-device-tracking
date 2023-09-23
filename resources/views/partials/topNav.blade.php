@@ -52,7 +52,7 @@
                             <a class="d-flex align-items-center gap-2" href="{{ route('readAllNotification') }}"
                                 style="margin-right: 15px">
                                 <i class="mdi mdi-check-all mx-1"></i>
-                                <span>Mark all as read</span>
+                                <span>Read all</span>
                             </a>
                         @endif
 
@@ -61,13 +61,25 @@
                     @foreach (Auth::user()->unreadNotifications as $notification)
                         <a class="dropdown-item preview-item" style="max-width: 400px">
                             <div class="preview-thumbnail">
-                                <div class="preview-icon bg-secondary">
-                                    <i class="mdi mdi-repeat mx-0"></i>
+                                @if ($notification->type == 'App\Notifications\RegisterNotification')
+                                <div class="preview-icon bg-success">
+                                    <i class="mdi mdi-desktop-mac mx-0"></i>
                                 </div>
+                                @else
+                                    <div class="preview-icon bg-secondary">
+                                        <i class="mdi mdi-repeat mx-0"></i>
+                                    </div>
+                                @endif
                             </div>
 
                             <div class="preview-item-content">
-                                <h6 class="preview-subject font-weight-bold mb-0 ">Transfer</h6>
+                                <h6 class="preview-subject font-weight-bold mb-0 ">
+                                    @if ($notification->type == 'App\Notifications\RegisterNotification')
+                                        New Device
+                                    @else
+                                        Transfer
+                                    @endif
+                                </h6>
                                 <p class="font-weight-light small-text mb-2 text-muted">
                                     {{ $notification->created_at->diffForHumans() }}
                                 </p>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Device;
 use App\Models\User;
+use App\Notifications\RegisterNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,6 +48,7 @@ class DeviceController extends Controller
         ]);
 
         Device::create($request->all());
+        $request->user()->notify(new RegisterNotification($request->name));
         return redirect()->back()->with("success", "Device registered!");
     }
 

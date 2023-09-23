@@ -16,7 +16,16 @@ class TransferController extends Controller
      */
     public function index()
     {
-        //
+        if (Auth::user()->type == "admin") {
+            $transfers = Transfer::latest()->paginate(4);
+        } else {
+            $transfers = Transfer::where(function ($query) {
+                $user_id = Auth::user()->id;
+                $query->where('sender', $user_id)->orWhere('receiver', $user_id);
+            })->latest()->paginate(6);
+        }
+
+        return view("transfer.transfer", compact("transfers"));
     }
 
     /**

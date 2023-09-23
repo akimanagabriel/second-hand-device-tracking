@@ -10,7 +10,7 @@
         </li>
 
         <li class="nav-item {{ Request::routeIs('device.index') ? 'active' : null }}">
-            <a class="nav-link" href="{{ route("device.index") }}">
+            <a class="nav-link" href="{{ route('device.index') }}">
                 <i class="mdi mdi-airplay menu-icon"></i>
                 <span class="menu-title">My Devices</span>
             </a>
@@ -33,8 +33,8 @@
             </a>
         </li>
 
-        <li class="nav-item {{ Request::routeIs('devices') ? 'active' : null }}">
-            <a class="nav-link" href="#">
+        <li class="nav-item {{ Request::routeIs('transfer.index') ? 'active' : null }}">
+            <a class="nav-link" href="{{ route('transfer.index') }}">
                 <i class="mdi mdi-tumblr-reblog menu-icon"></i>
                 <span class="menu-title">Transfer</span>
             </a>
