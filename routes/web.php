@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\IssueController;
 use App\Http\Controllers\TransferController;
 use App\Http\Controllers\UserCreationController;
 use Illuminate\Support\Facades\Auth;
@@ -36,4 +37,7 @@ Route::middleware('auth')->group(function () {
     // notification
     Route::get("/readall", [TransferController::class, "markAsRead"])->name("readAllNotification");
     Route::view("/notifications", "notification.all")->name("notifications");
+
+    // cases routes
+    Route::resource("/issues", IssueController::class);
 });

@@ -26,8 +26,8 @@
         @endif
 
 
-        <li class="nav-item {{ Request::routeIs('devices') ? 'active' : null }}">
-            <a class="nav-link" href="#">
+        <li class="nav-item {{ Request::routeIs('issues.index') ? 'active' : null }}">
+            <a class="nav-link" href="{{ route("issues.index") }}">
                 <i class="mdi mdi-briefcase menu-icon"></i>
                 <span class="menu-title">Cases</span>
             </a>
@@ -48,12 +48,12 @@
         </li>
 
 
-        <li class="nav-item {{ Request::routeIs('devices') ? 'active' : null }}">
+        {{-- <li class="nav-item {{ Request::routeIs('devices') ? 'active' : null }}">
             <a class="nav-link" href="#">
                 <i class="mdi mdi-file-document menu-icon"></i>
                 <span class="menu-title">Report</span>
             </a>
-        </li>
+        </li> --}}
 
 
         @if (Auth::user()->type == 'admin')

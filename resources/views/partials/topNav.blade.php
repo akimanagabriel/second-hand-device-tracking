@@ -62,9 +62,9 @@
                         <a class="dropdown-item preview-item">
                             <div class="preview-thumbnail">
                                 @if ($notification->type == 'App\Notifications\RegisterNotification')
-                                <div class="preview-icon bg-success">
-                                    <i class="mdi mdi-desktop-mac mx-0"></i>
-                                </div>
+                                    <div class="preview-icon bg-success">
+                                        <i class="mdi mdi-desktop-mac mx-0"></i>
+                                    </div>
                                 @else
                                     <div class="preview-icon bg-secondary">
                                         <i class="mdi mdi-repeat mx-0"></i>
@@ -105,10 +105,12 @@
                     <img alt="profile" src="images/faces/face28.jpg" />
                 </a>
                 <div aria-labelledby="profileDropdown" class="dropdown-menu dropdown-menu-right navbar-dropdown">
-                    <a class="dropdown-item">
+                    
+                    {{-- <a class="dropdown-item">
                         <i class="ti-settings text-primary"></i>
                         Settings
-                    </a>
+                    </a> --}}
+
                     <a class="dropdown-item">
                         <form action="{{ route('logout') }}" method="post">
                             @csrf
