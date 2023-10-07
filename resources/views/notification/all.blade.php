@@ -25,7 +25,7 @@
         <div class="preview-list">
 
             @foreach (Auth::user()->notifications->take(10) as $notification)
-                <div class="preview-item px-5 py-4 rounded-lg">
+                <div class="preview-item px-5 py-4 rounded-lg  mb-2 {{ $notification->read_at === null ? 'bg-warning' : "bg-white" }}">
                     <div class="preview-thumbnail">
                         @if ($notification->type == 'App\Notifications\RegisterNotification')
                             <div class="preview-icon bg-success">

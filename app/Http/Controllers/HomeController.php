@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Device;
+use App\Models\Transfer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -23,6 +28,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $devices = Device::all()->where("user_id", Auth::user()->id)->count();
+        $users = User::all()->count();
+        $transfers = Transfer::where("sender", Auth::user()->id)->orWhere("receiver", Auth::user()->id)->count();
+        $notifications = Auth::user()->notifications->count();
+        return view('home', compact("devices", "users", "transfers", "notifications"));
     }
 }
