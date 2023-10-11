@@ -3,7 +3,7 @@
         <a class="navbar-brand brand-logo mr-5" href="/">
             <div class=" d-flex align-items-center">
                 <img alt="logo" class="mr-2" src="images/logo-mini.svg" />
-                <span>OSHDTMS</span>
+                <span>TCT</span>
             </div>
 
         </a>
@@ -102,7 +102,7 @@
             <li class="nav-item nav-profile dropdown">
                 <span class="">{{ Auth::user()->lastname }}&nbsp;&nbsp;&nbsp;</span>
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" id="profileDropdown">
-                    <img alt="profile" src="images/faces/face28.jpg" />
+                    <img alt="profile" src="images/faces/user.png" />
                 </a>
                 <div aria-labelledby="profileDropdown" class="dropdown-menu dropdown-menu-right navbar-dropdown">
                     
