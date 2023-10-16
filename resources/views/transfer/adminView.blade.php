@@ -10,7 +10,7 @@
 @if (count($transfers) == 0)
     <div class="alert alert-info col">No tranfer record available right now</div>
 @else
-    <h4 class="mb-3 col-md-12">All clients's Transfer history</h4>
+    <h4 class="mb-3 col-md-12">Transfers</h4>
     @foreach ($transfers as $transfer)
         @php
             $sender = User::find($transfer->sender);
@@ -32,6 +32,11 @@
                                 {{ $device->brand }}-{{ $device->name }}
                                 with {{ $receiver->firstname }} {{ $receiver->lastname }}
                             </span>
+                        </p>
+                        <p class="mt-2">
+                            Device Name: <strong class="text-info">{{ Str::upper($device->name) }}</strong><br>
+                            Device Serialnumber: <strong class="text-info">{{ Str::upper($device->sn) }}</strong><br>
+                            Device Brand: <strong class="text-info">{{ Str::upper($device->brand) }}</strong>
                         </p>
                     </div>
 

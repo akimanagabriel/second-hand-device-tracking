@@ -13,19 +13,21 @@
         <button class="navbar-toggler navbar-toggler align-self-center" data-toggle="minimize" type="button">
             <span class="icon-menu"></span>
         </button>
-        <ul class="navbar-nav mr-lg-2">
-            <li class="nav-item nav-search d-none d-lg-block">
-                <div class="input-group">
-                    <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
-                        <span class="input-group-text" id="search">
-                            <i class="icon-search"></i>
-                        </span>
+        <form action="{{ route('search') }}" method="get">
+            <ul class="navbar-nav mr-lg-2">
+                <li class="nav-item nav-search d-none d-lg-block">
+                    <div class="input-group">
+                        <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
+                            <button class="input-group-text" id="search" type="submit">
+                                <i class="icon-search"></i>
+                            </button>
+                        </div>
+                        <input aria-describedby="search" aria-label="search" class="form-control"
+                            id="navbar-search-input" name="serialNumber" placeholder="Device's S/N" type="search">
                     </div>
-                    <input aria-describedby="search" aria-label="search" class="form-control" id="navbar-search-input"
-                        placeholder="Search now" type="text">
-                </div>
-            </li>
-        </ul>
+                </li>
+            </ul>
+        </form>
 
 
 
@@ -105,11 +107,6 @@
                     <img alt="profile" src="images/faces/user.png" />
                 </a>
                 <div aria-labelledby="profileDropdown" class="dropdown-menu dropdown-menu-right navbar-dropdown">
-                    
-                    {{-- <a class="dropdown-item">
-                        <i class="ti-settings text-primary"></i>
-                        Settings
-                    </a> --}}
 
                     <a class="dropdown-item">
                         <form action="{{ route('logout') }}" method="post">

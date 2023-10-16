@@ -74,9 +74,13 @@ class TransferController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Transfer $transfer)
+    public function show($id)
     {
-        //
+        $transfers = Transfer::where("device", $id)->latest()->paginate(60);
+
+        return view("transfer.show", compact(
+            "transfers",
+        ));
     }
 
     /**
@@ -108,5 +112,4 @@ class TransferController extends Controller
         Auth::user()->unreadNotifications->markAsRead();
         return redirect()->back();
     }
-
 }

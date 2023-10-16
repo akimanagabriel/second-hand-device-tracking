@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DeviceController;
 use App\Http\Controllers\IssueController;
+use App\Http\Controllers\searchController;
 use App\Http\Controllers\TransferController;
 use App\Http\Controllers\UserCreationController;
 use Illuminate\Support\Facades\Auth;
@@ -33,6 +34,7 @@ Route::middleware('auth')->group(function () {
 
     // transfer
     Route::resource("/transfer", TransferController::class);
+    Route::get("/device{id}transfer", [TransferController::class, "show"])->name("showSingleTransfer");
 
     // notification
     Route::get("/readall", [TransferController::class, "markAsRead"])->name("readAllNotification");
@@ -40,4 +42,7 @@ Route::middleware('auth')->group(function () {
 
     // cases routes
     Route::resource("/issues", IssueController::class);
+
+    // search routes
+    Route::get("/search", [searchController::class, "searchDevice"])->name("search");
 });
