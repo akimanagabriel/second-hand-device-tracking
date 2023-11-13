@@ -40,16 +40,26 @@ class DeviceController extends Controller
             "sn" => "required|min:4|string",
             "category" => "required|string",
             "brand" => "required|string",
+            "invoiceFile" => "required|file",
         ]);
 
         $request->merge([
             "user_id" => Auth::user()->id,
-            "status" => 1
+            "status" => 0,
         ]);
 
-        Device::create($request->all());
-        $request->user()->notify(new RegisterNotification($request->name));
-        return redirect()->back()->with("success", "Device registered!");
+        if ($request->hasFile("invoiceFile")) {
+            $file = $request->file("invoiceFile");
+            $filename = time() . "." . $file->getClientOriginalExtension();
+            $file->move("invoices/", $filename);
+            $request->merge(["invoice" => $filename]);
+            // dd($request->all());
+            Device::create($request->all());
+            $request->user()->notify(new RegisterNotification($request->name));
+            return redirect()->back()->with("success", "Device registered!");
+        } else {
+            return redirect()->back()->with("error", "failed to register a device!");
+        }
     }
 
     /**

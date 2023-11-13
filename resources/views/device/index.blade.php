@@ -23,7 +23,6 @@
         <div class="alert alert-info mx-3">No device registered yet!</div>
     @else
         <div class="row">
-
             @foreach ($devices as $device)
                 <div class="col-md-4 my-3">
                     <div class="card">
@@ -33,9 +32,11 @@
                                     <h4 class="card-title mb-0">{{ $device->brand }} - {{ $device->name }}</h4>
                                     <small class="text-secondary">{{ $device->created_at->diffForHumans() }}</small>
                                     <div class="mt-2">
-                                        <p class="card-description my-2 p-0">{!! $device->status
-                                            ? "<span class='p-1 px-3 rounded bg-success text-white'>ACTIVE</span>"
-                                            : "<span class='p-1  px-3 rounded bg-danger text-white'>INACTIVE</span>" !!}</p>
+                                        <p class="card-description my-2 p-0">
+                                            {!! $device->status
+                                                ? "<span class='p-1 px-3 rounded bg-success text-white'>ACTIVE</span>"
+                                                : "<span class='p-1  px-3 rounded bg-danger text-white'>INACTIVE</span>" !!}
+                                        </p>
                                         <p class="card-description m-0 p-0"><strong>Brand:</strong> {{ $device->brand }}</p>
                                         <p class="card-description m-0 p-0"><strong>S.N:</strong> {{ $device->sn }}</p>
                                         <p class="card-description m-0 p-0"><strong>Category:</strong>
@@ -52,9 +53,6 @@
                                             <i class="mdi mdi-repeat"></i> Transfer
                                         </button>
                                     </div>
-
-
-
                                 </div>
                             </div>
 
@@ -123,7 +121,7 @@
 
 
     {{-- new device  modal --}}
-    <form action="{{ route('device.store') }}" method="POST">
+    <form action="{{ route('device.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="modal" id="newDevice">
             <div class="modal-dialog modal-dialog-sm">
@@ -161,6 +159,10 @@
                             </select>
                         </div>
 
+                        <div class="form-group">
+                            <input class="form-control" id="exampleInputUsername1" name="invoiceFile" placeholder="Brand"
+                                type="file" value="{{ old('invoiceFile') }}">
+                        </div>
 
                     </div>
 

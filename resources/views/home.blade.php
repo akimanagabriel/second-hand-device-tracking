@@ -42,7 +42,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 mb-4 stretch-card transparent">
+                {{-- <div class="col-md-6 mb-4 stretch-card transparent">
                     <div class="card card-dark-blue">
                         <div class="card-body">
                             <p class="mb-4">Users</p>
@@ -50,7 +50,7 @@
                             <p>registered</p>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
             <div class="row">
                 <div class="col-md-6 mb-4 mb-lg-0 stretch-card transparent">
@@ -58,7 +58,7 @@
                         <div class="card-body">
                             <p class="mb-4">Transfers</p>
                             <p class="fs-30 mb-2">{{ $transfers }}</p>
-                            <p>since 3 days ago</p>
+                            {{-- <p>since 3 days ago</p> --}}
                         </div>
                     </div>
                 </div>

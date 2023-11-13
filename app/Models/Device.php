@@ -15,5 +15,6 @@ class Device extends Model
         "category",
         "brand",
         "status",
+        "invoice"
     ];
 }

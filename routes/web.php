@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DeviceController;
+use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\IssueController;
 use App\Http\Controllers\searchController;
 use App\Http\Controllers\TransferController;
@@ -45,4 +46,8 @@ Route::middleware('auth')->group(function () {
 
     // search routes
     Route::get("/search", [searchController::class, "searchDevice"])->name("search");
+
+    // invoices
+    Route::get("/invoices_indexing", [InvoiceController::class, "getAllInvoices"])->name("invoice.all");
+    Route::get("/approve_invoice/{device_id}", [InvoiceController::class, "approveInvoice"])->name("invoice.approve");
 });

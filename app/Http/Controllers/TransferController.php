@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Notifications\TransferNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class TransferController extends Controller
 {
@@ -67,6 +68,10 @@ class TransferController extends Controller
         // Notify a receiver
         $notification = "You have received ownership of <br> <b>$device->brand $device->name</b> from <b>$sender->firstname $sender->lastname </b>";
         $receiver->notify(new TransferNotification($notification));
+
+        // NOTIFY AN ADMIN
+        $admins = User::where("type", "admin")->get();
+        Notification::send($admins, new TransferNotification("There is a transfer of <b>$device->brand $device->name</b> from <b>$sender->firstname $sender->lastname</b> to <b>$receiver->firstname $receiver->lastname</b>"));
 
         return redirect()->back()->with("success", "Transfer completed successfully");
     }

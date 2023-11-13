@@ -27,7 +27,7 @@
 
 
         <li class="nav-item {{ Request::routeIs('issues.index') ? 'active' : null }}">
-            <a class="nav-link" href="{{ route("issues.index") }}">
+            <a class="nav-link" href="{{ route('issues.index') }}">
                 <i class="mdi mdi-briefcase menu-icon"></i>
                 <span class="menu-title">Cases</span>
             </a>
@@ -41,7 +41,7 @@
         </li>
 
         <li class="nav-item {{ Request::routeIs('notifications') ? 'active' : null }}">
-            <a class="nav-link" href="{{ route("notifications") }}">
+            <a class="nav-link" href="{{ route('notifications') }}">
                 <i class="mdi mdi-bell-ring-outline menu-icon"></i>
                 <span class="menu-title">Notifications</span>
             </a>
@@ -61,6 +61,16 @@
                 <a class="nav-link" href="{{ route('users.list') }}">
                     <i class="mdi mdi-account-multiple-outline menu-icon"></i>
                     <span class="menu-title">Users</span>
+                </a>
+            </li>
+        @endif
+
+
+        @if (Auth::user()->type == 'admin')
+            <li class="nav-item {{ Request::routeIs('invoice.all') ? 'active' : null }}">
+                <a class="nav-link" href="{{ route('invoice.all') }}">
+                    <i class="mdi mdi-briefcase menu-icon"></i>
+                    <span class="menu-title">Invoices</span>
                 </a>
             </li>
         @endif

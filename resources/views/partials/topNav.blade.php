@@ -3,7 +3,7 @@
         <a class="navbar-brand brand-logo mr-5" href="/">
             <div class=" d-flex align-items-center">
                 <img alt="logo" class="mr-2" src="images/logo-mini.svg" />
-                <span>TCT</span>
+                <span>OSHDTMS</span>
             </div>
 
         </a>

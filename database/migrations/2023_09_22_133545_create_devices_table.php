@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer("user_id");
             $table->string("category");
             $table->string("brand");
+            $table->string("invoice");
             $table->integer("status")->default(1);
             $table->timestamps();
         });
