@@ -50,4 +50,5 @@ Route::middleware('auth')->group(function () {
     // invoices
     Route::get("/invoices_indexing", [InvoiceController::class, "getAllInvoices"])->name("invoice.all");
     Route::get("/approve_invoice/{device_id}", [InvoiceController::class, "approveInvoice"])->name("invoice.approve");
+    Route::get("/reject_invoice/{device_id}", [InvoiceController::class, "rejectInvoice"])->name("invoice.reject");
 });

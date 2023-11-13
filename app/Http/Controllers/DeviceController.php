@@ -40,7 +40,7 @@ class DeviceController extends Controller
             "sn" => "required|min:4|string",
             "category" => "required|string",
             "brand" => "required|string",
-            "invoiceFile" => "required|file",
+            "invoiceFile" => "required|file|mimes:jpeg,png,jpg,gif,pdf",
         ]);
 
         $request->merge([

@@ -23,4 +23,14 @@ class InvoiceController extends Controller
         );
         return back()->with("success", "Invoice approved successfully");
     }
+
+    public function rejectInvoice($deviceId)
+    {
+        $device = Device::find($deviceId);
+        User::find($device->user_id)->notify(
+            new InvoiceNotification("<span  style='color:red;'>Invoice of <b> $device->name </b> has been rejected,<br> try to register your device with a correct invoice</span>")
+        );
+        $device->delete();
+        return back()->with("success", "Invoice rejected successfully");
+    }
 }

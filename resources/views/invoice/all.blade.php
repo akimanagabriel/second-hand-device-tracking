@@ -27,6 +27,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Date</th>
                                 <th>Invoice</th>
                                 <th>Owner</th>
                                 <th>Device name</th>
@@ -40,9 +41,9 @@
                                 @endphp
                                 <tr>
                                     <td>{{ $loop->index + 1 }}</td>
+                                    <td>{{ $device->created_at }}</td>
                                     <td>
                                         <a href="/invoices/{{ $device->invoice }}" target="_blank">
-                                            <img alt="" src="/invoices/{{ $device->invoice }}">
                                             {{ $device->invoice }}
                                         </a>
                                     </td>
@@ -51,7 +52,7 @@
                                     <td>
                                         <a class="btn btn-sm btn-primary"
                                             href="{{ route('invoice.approve', $device->id) }}">Approve</a>
-                                        <button class="btn btn-sm btn-danger">Reject</button>
+                                        <a href="{{ route('invoice.reject', $device->id) }}" class="btn btn-sm btn-danger">Reject</a>
                                     </td>
                                 </tr>
                             @endforeach
